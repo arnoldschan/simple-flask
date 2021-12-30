@@ -1,0 +1,17 @@
+version: "3.9"
+services:
+  webapp:
+    volumes:
+      - text_volume:/text_dir
+
+  text:
+    build:
+      context: .
+      dockerfile: Dockerfile_text
+    volumes:
+      - text_volume:/text_dir
+    ports:
+      - 5001:5000
+
+volumes:
+  text_volume: null

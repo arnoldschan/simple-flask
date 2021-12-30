@@ -98,3 +98,13 @@ There are several things happen:
 2. Attaches `5000` port to host's `80` port
 3. Runs `simple-flask-api`'s command
  
+ ## Network connection within `docker-compose.yml` services
+
+Make sure you have done:
+```
+git checkout volumes-network
+```
+
+ You can access another container api with it's service name in the same `docker-compose.yml` file [(Reference)](https://docs.docker.com/compose/networking/)
+
+simply said, if you call http://

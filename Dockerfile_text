@@ -1,0 +1,7 @@
+FROM python:3.9.5-slim-buster
+WORKDIR /text_dir/
+COPY ./requirements.txt ./requirements.txt
+RUN pip3 install -r ./requirements.txt
+COPY ./ ./
+ENTRYPOINT ["/bin/sh"]
+CMD ["-c", "python app_text.py"]
