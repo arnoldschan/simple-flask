@@ -41,3 +41,55 @@ Once the Docker container is running, we can access it in the web browser http:/
 
 
 Happy coding!
+
+_________________________________________________
+# Docker Compose
+
+Docker Compose reference:
+https://docs.docker.com/compose/compose-file/compose-file-v3/
+
+## Run docker compose
+### Development environment
+----
+
+Image run:
+```
+docker-compose up
+```
+There are several things happen:
+
+1. `docker-compose` automatically creates images of `webapp` by building it from the context and dockerfile attribute
+2. names the newly created image to: `<parent folder name>_<servicename>`. In this example: `simple-flask_webapp`
+3. `docker-compose` runs `webapp` service with it's `CMD` attribute in `Dockerfile` or `command` attribute in `docker-compose`
+4. `docker-compose` attaches container's `5000` port to host's `5000` port
+
+You can
+
+`docker-compose up`
+
+is similar to 
+`docker build -t simple-flask_webapp .`
+
+`docker run simple-flask_webapp`
+
+----
+### Production Environment
+----
+In Production environment, we shouldn't copy our code base. We should only pull and run docker images.
+
+In this case, the provided `docker-compose.prod.yml` extends the default `docker-compose.yml`. 
+
+It consists of the attributes that can extend the current `webapp` service (notice the same service name `webapp`)
+
+to run it:
+```
+docker-compose -f docker-compose.yml -f docker-compose.prod.yml up
+```
+
+by default `docker-compose` reads `docker-compose.yml`. To extend it, we need to explicitly tells which `yml` file it needs to read with `-f` arguments. 
+
+There are several things happen:
+1. Pulls `simple-flask-api` image if it doesn't exist yet.
+2. Attaches `5000` port to host's `80` port
+3. Runs `simple-flask-api`'s command
+ 
