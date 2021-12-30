@@ -45,6 +45,11 @@ Happy coding!
 _________________________________________________
 # Docker Compose
 
+Make sure you have done:
+```
+git checkout compose
+```
+
 Docker Compose reference:
 https://docs.docker.com/compose/compose-file/compose-file-v3/
 
