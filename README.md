@@ -124,7 +124,7 @@ simply said, if you call `http://text:5000/read`, you can reach the `text` servi
 
 ### How does it work?
 Compose automatically create docker network within docker-compose's services.
-You can however manually renaming the network and/or add external network. [Reference](https://docs.docker.com/compose/networking/#
+You can however manually renaming the network and/or add external network. [Reference](https://docs.docker.com/compose/networking/#)
 
 ## Volume linking
 
