@@ -98,13 +98,40 @@ There are several things happen:
 2. Attaches `5000` port to host's `80` port
 3. Runs `simple-flask-api`'s command
  
- ## Network connection within `docker-compose.yml` services
+## Network connection within `docker-compose.yml` services
 
 Make sure you have done:
 ```
 git checkout volumes-network
 ```
 
+to run:
+```
+docker-compose -f docker-compose.yml -f docker-compose.text.yml up --build
+```
+
+to stop:
+```
+docker-compose -f docker-compose.yml -f docker-compose.text.yml down -v   
+```
+
+
  You can access another container api with it's service name in the same `docker-compose.yml` file [(Reference)](https://docs.docker.com/compose/networking/)
 
-simply said, if you call http://
+Take a look on `docker-compose.text.yml`. There is additional service called `text`, builds on `Dockerfile_text` which runs `app_text.py`. 
+
+simply said, if you call `http://text:5000/read`, you can reach the `text` service without having to define the IP and etc.
+
+### How does it work?
+Compose automatically create docker network within docker-compose's services.
+You can however manually renaming the network and/or add external network. [Reference](https://docs.docker.com/compose/networking/#
+
+## Volume linking
+
+The `text` service manages the text contents of `/text_dir/text.txt` through it's own api.
+
+while `webapp` service doesn't have any access to `text` file contents unless it's linked in `docker-compose` with the attribute `volumes`.
+
+In the example in `docker-compose.text.yml` we create a new docker volume called `text_volume` which is populated by `text` service (because `text` service's workdir in that directory) 
+
+![](image/docker-volume.png)
